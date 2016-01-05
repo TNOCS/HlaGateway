@@ -3,6 +3,7 @@
 
 # sbt specific
 .cache
+.cache-main
 .history
 .lib/
 dist/*
@@ -10,8 +11,18 @@ target/
 lib_managed/
 src_managed/
 project/boot/
+project/target/
 project/plugins/project/
 
 # Scala-IDE specific
+.settings
 .scala_dependencies
 .worksheet
+
+# Project specific
+deps
+COPPR
+bin
+scalatra-server
+swagger.yaml
+test

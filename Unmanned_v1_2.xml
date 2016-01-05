@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<objectModel xsi:schemaLocation="http://standards.ieee.org/IEEE1516-2010 http://standards.ieee.org/downloads/1516/1516.2-2010/IEEE1516-DIF-2010.xsd" xmlns="http://standards.ieee.org/IEEE1516-2010" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <modelIdentification>
+        <name>Unmanned</name>
+        <type>FOM</type>
+        <version>1.2</version>
+        <modificationDate>2015-05-07</modificationDate>
+        <securityClassification>unclassified</securityClassification>
+        <purpose></purpose>
+        <applicationDomain></applicationDomain>
+        <description>FOM module for project Unmanned</description>
+        <useLimitation></useLimitation>
+        <poc>
+            <pocType>Primary author</pocType>
+            <pocName>Henk Henderson</pocName>
+            <pocOrg>TNO</pocOrg>
+        </poc>
+        <other>Some track attibutes added/changed.</other>
+    </modelIdentification>
+    <objects>
+        <objectClass>
+            <name>HLAobjectRoot</name>
+            <objectClass>
+                <name>Track</name>
+                <sharing>PublishSubscribe</sharing>
+                <semantics>The track information that belongs to a certain ground truth object.</semantics>
+                <attribute>
+                    <name>EntityIdentifier</name>
+                    <dataType>EntityIdentifierStruct</dataType>
+                    <updateType>Static</updateType>
+                    <updateCondition>NA</updateCondition>
+                    <ownership>DivestAcquire</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAbestEffort</transportation>
+                    <order>Receive</order>
+                    <semantics>The identifier of the corresponding ground truth object.</semantics>
+                </attribute>
+                <attribute>
+                    <name>TrackID</name>
+                    <dataType>TrackIdentifier</dataType>
+                    <updateType>Static</updateType>
+                    <updateCondition>NA</updateCondition>
+                    <ownership>DivestAcquire</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAbestEffort</transportation>
+                    <order>Receive</order>
+                    <semantics>The number of the track</semantics>
+                </attribute>
+                <attribute>
+                    <name>Source</name>
+                    <dataType>SourceEnum</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On Change</updateCondition>
+                    <ownership>DivestAcquire</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAbestEffort</transportation>
+                    <order>Receive</order>
+                    <semantics>The source of the track</semantics>
+                </attribute>
+                <attribute>
+                    <name>DateTime</name>
+                    <dataType>DateTime18</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On Change</updateCondition>
+                    <ownership>DivestAcquire</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAbestEffort</transportation>
+                    <order>Receive</order>
+                    <semantics>The date and time of the last update of the track.</semantics>
+                </attribute>
+                <attribute>
+                    <name>Location</name>
+                    <dataType>GeodeticLocationStruct</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On Change</updateCondition>
+                    <ownership>DivestAcquire</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAbestEffort</transportation>
+                    <order>Receive</order>
+                    <semantics>The geodetic (latitude, longitude, altitude) of the track.</semantics>
+                </attribute>
+                <attribute>
+                    <name>Heading</name>
+                    <dataType>AngleDegreeFloat32</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On Change</updateCondition>
+                    <ownership>DivestAcquire</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAbestEffort</transportation>
+                    <order>Receive</order>
+                    <semantics>The heading of the track in degrees.</semantics>
+                </attribute>
+                <attribute>
+                    <name>Speed</name>
+                    <dataType>VelocityMeterPerSecondFloat32</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On Change</updateCondition>
+                    <ownership>DivestAcquire</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAbestEffort</transportation>
+                    <order>Receive</order>
+                    <semantics>The speed of the track  in meter/sec.</semantics>
+                </attribute>
+                <attribute>
+                    <name>Identity</name>
+                    <dataType>IdentityEnum</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On Change</updateCondition>
+                    <ownership>DivestAcquire</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAbestEffort</transportation>
+                    <order>Receive</order>
+                    <semantics>The identity of the track.</semantics>
+                </attribute>
+                <attribute>
+                    <name>Type</name>
+                    <dataType>TypeEnum</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On Change</updateCondition>
+                    <ownership>DivestAcquire</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAbestEffort</transportation>
+                    <order>Receive</order>
+                    <semantics>The type of the track.</semantics>
+                </attribute>
+                <attribute>
+                    <name>Color</name>
+                    <dataType>ColorEnum</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On Change</updateCondition>
+                    <ownership>DivestAcquire</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAbestEffort</transportation>
+                    <order>Receive</order>
+                    <semantics>The color of the track</semantics>
+                </attribute>
+                <attribute>
+                    <name>HumanAction</name>
+                    <dataType>HumanActionEnum</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On Change</updateCondition>
+                    <ownership>DivestAcquire</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAbestEffort</transportation>
+                    <order>Receive</order>
+                    <semantics>The actiion of the track (only for human).</semantics>
+                </attribute>
+            </objectClass>
+        </objectClass>
+    </objects>
+    <interactions>
+        <interactionClass>
+            <name>HLAinteractionRoot</name>
+            <interactionClass>
+                <name>Detection</name>
+                <sharing>PublishSubscribe</sharing>
+                <transportation>HLAreliable</transportation>
+                <order>Receive</order>
+                <semantics>Describes the detection of an object.</semantics>
+                <parameter>
+                    <name>DateTime</name>
+                    <dataType>DateTime18</dataType>
+                    <semantics>The date and time of the dectection.</semantics>
+                </parameter>
+                <parameter>
+                    <name>DetectionType</name>
+                    <dataType>HLAunicodeString</dataType>
+                    <semantics>The type of the dectection.</semantics>
+                </parameter>
+                <parameter>
+                    <name>RelatedTrackID</name>
+                    <dataType>TrackIdentifier</dataType>
+                    <semantics>Reference to the track.</semantics>
+                </parameter>
+                <parameter>
+                    <name>RelatedAreaName</name>
+                    <dataType>HLAunicodeString</dataType>
+                    <semantics>The name of the related area.</semantics>
+                </parameter>
+            </interactionClass>
+        </interactionClass>
+    </interactions>
+    <switches>
+        <autoProvide isEnabled="false"/>
+        <conveyRegionDesignatorSets isEnabled="false"/>
+        <conveyProducingFederate isEnabled="false"/>
+        <attributeScopeAdvisory isEnabled="false"/>
+        <attributeRelevanceAdvisory isEnabled="false"/>
+        <objectClassRelevanceAdvisory isEnabled="false"/>
+        <interactionRelevanceAdvisory isEnabled="false"/>
+        <serviceReporting isEnabled="false"/>
+        <exceptionReporting isEnabled="false"/>
+        <delaySubscriptionEvaluation isEnabled="false"/>
+        <automaticResignAction resignAction="CancelThenDeleteThenDivest"/>
+    </switches>
+    <dataTypes>
+        <simpleDataTypes>
+            <simpleData>
+                <name>TrackIdentifier</name>
+                <representation>RPRunsignedInteger16BE</representation>
+                <units>NA</units>
+                <resolution>1</resolution>
+                <accuracy>NA</accuracy>
+                <semantics>Identifiies a track by a number.</semantics>
+            </simpleData>
+        </simpleDataTypes>
+        <enumeratedDataTypes>
+            <enumeratedData>
+                <name>SourceEnum</name>
+                <representation>HLAoctet</representation>
+                <semantics>Source of a track.</semantics>
+                <enumerator>
+                    <name>GMTI</name>
+                    <value>0</value>
+                </enumerator>
+                <enumerator>
+                    <name>EOTracker</name>
+                    <value>1</value>
+                </enumerator>
+                <enumerator>
+                    <name>User</name>
+                    <value>2</value>
+                </enumerator>
+                <enumerator>
+                    <name>BFTracker</name>
+                    <value>3</value>
+                </enumerator>
+                <enumerator>
+                    <name>Unknown</name>
+                    <value>4</value>
+                </enumerator>
+            </enumeratedData>
+            <enumeratedData>
+                <name>IdentityEnum</name>
+                <representation>HLAoctet</representation>
+                <semantics>Identity of track</semantics>
+                <enumerator>
+                    <name>Pending</name>
+                    <value>0</value>
+                </enumerator>
+                <enumerator>
+                    <name>Unknown</name>
+                    <value>1</value>
+                </enumerator>
+                <enumerator>
+                    <name>AssumedFriend</name>
+                    <value>2</value>
+                </enumerator>
+                <enumerator>
+                    <name>Friend</name>
+                    <value>3</value>
+                </enumerator>
+                <enumerator>
+                    <name>Neutral</name>
+                    <value>4</value>
+                </enumerator>
+                <enumerator>
+                    <name>Suspect</name>
+                    <value>5</value>
+                </enumerator>
+                <enumerator>
+                    <name>Hostile</name>
+                    <value>6</value>
+                </enumerator>
+            </enumeratedData>
+            <enumeratedData>
+                <name>TypeEnum</name>
+                <representation>HLAoctet</representation>
+                <semantics>Type of the track</semantics>
+                <enumerator>
+                    <name>Unknown</name>
+                    <value>0</value>
+                </enumerator>
+                <enumerator>
+                    <name>Human</name>
+                    <value>1</value>
+                </enumerator>
+                <enumerator>
+                    <name>VehicleSmall</name>
+                    <value>2</value>
+                </enumerator>
+                <enumerator>
+                    <name>VehicleLarge</name>
+                    <value>3</value>
+                </enumerator>
+            </enumeratedData>
+            <enumeratedData>
+                <name>ColorEnum</name>
+                <representation>HLAoctet</representation>
+                <semantics>Color of track</semantics>
+                <enumerator>
+                    <name>Unknown</name>
+                    <value>0</value>
+                </enumerator>
+                <enumerator>
+                    <name>Light</name>
+                    <value>1</value>
+                </enumerator>
+                <enumerator>
+                    <name>Dark</name>
+                    <value>2</value>
+                </enumerator>
+            </enumeratedData>
+            <enumeratedData>
+                <name>HumanActionEnum</name>
+                <representation>HLAoctet</representation>
+                <semantics>Human action of track</semantics>
+                <enumerator>
+                    <name>Unknown</name>
+                    <value>0</value>
+                </enumerator>
+                <enumerator>
+                    <name>Running</name>
+                    <value>1</value>
+                </enumerator>
+                <enumerator>
+                    <name>Walking</name>
+                    <value>2</value>
+                </enumerator>
+            </enumeratedData>
+        </enumeratedDataTypes>
+        <arrayDataTypes>
+            <arrayData>
+                <name>DateTime18</name>
+                <dataType>HLAunicodeChar</dataType>
+                <cardinality>18</cardinality>
+                <encoding>HLAfixedArray</encoding>
+                <semantics>A designation of a specified chronological point measured using Coordinated Universal Time (UTC) ISO 8601:2000 as a standard of reference, constrained to "zero meridian" i.e. �Zulu� time zone only. This is expressed as a composite field using a compacted ISO notation YYYYMMDDHHMMSS.SSS where YYYY represents a year, MM represents a month in values from 00 to 12, and DD represents a day in values from 00 to 31, HH represents an hour, MM represents a minute, and SS.SSS represents the number of seconds and milliseconds.</semantics>
+            </arrayData>
+        </arrayDataTypes>
+        <fixedRecordDataTypes>
+            <fixedRecordData>
+                <name>GeodeticLocationStruct</name>
+                <encoding>HLAfixedRecord</encoding>
+                <semantics>The geodetic position</semantics>
+                <field>
+                    <name>Latitude</name>
+                    <dataType>AngleDegreeFloat32</dataType>
+                    <semantics>The latitude of the geodetic location (in degrees).</semantics>
+                </field>
+                <field>
+                    <name>Longitude</name>
+                    <dataType>AngleDegreeFloat32</dataType>
+                    <semantics>The longitude of the geographic position (in degrees)</semantics>
+                </field>
+                <field>
+                    <name>Altitude</name>
+                    <dataType>MeterFloat32</dataType>
+                    <semantics>The height above sea level.</semantics>
+                </field>
+            </fixedRecordData>
+        </fixedRecordDataTypes>
+        <variantRecordDataTypes/>
+    </dataTypes>
+    <notes/>
+</objectModel>
