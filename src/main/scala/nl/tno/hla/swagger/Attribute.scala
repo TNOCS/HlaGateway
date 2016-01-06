@@ -1,21 +1,21 @@
-package main.fom
-
-import scala.xml._
+package nl.tno.hla.swagger
 
 /**
  * Represents a simple data type as defined in the FOM.
  */
-case class Attribute(attribute: Node) {
-  lazy private val name            = (attribute \ "name").text
-  lazy private val dataType        = (attribute \ "dataType").text
-  lazy private val updateType      = (attribute \ "updateType").text
-  lazy private val updateCondition = (attribute \ "updateCondition").text
-  lazy private val ownership       = (attribute \ "ownership").text
-  lazy private val sharing         = (attribute \ "sharing").text
-  lazy private val transportation  = (attribute \ "transportation").text
-  lazy private val order           = (attribute \ "order").text
-  lazy private val semantics       = (attribute \ "semantics").text
-  
+case class Attribute(attribute: nl.tno.hla.fom.Attribute) {
+  lazy val name            = attribute.name
+  lazy val dataType        = attribute.dataType
+  lazy val updateType      = attribute.updateType
+  lazy val updateCondition = attribute.updateCondition
+  lazy val ownership       = attribute.ownership
+  lazy val sharing         = attribute.sharing
+  lazy val transportation  = attribute.transportation
+  lazy val order           = attribute.order
+  lazy val semantics       = attribute.semantics
+
+  def getDescription(): String = { return semantics; }
+
   /**
    * Convert the simple data type to a Swagger parameter definition.
    */

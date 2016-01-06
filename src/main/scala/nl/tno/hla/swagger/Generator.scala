@@ -1,13 +1,13 @@
-package main.scala
+package nl.tno.hla.swagger
 
 import java.io._
 import scala.xml._
-import main.fom.FomWrapper
+import nl.tno.hla.fom._
 
 /**
  * Generates a Swagger YAML file, which can be used to generate a REST server in Scalatra.
  */
-class SwaggerFileGenerator {
+class Generator {
   private var yaml = "";
   
   def create(fom: FomWrapper, host: String = "localhost:8080") {
@@ -43,14 +43,11 @@ class SwaggerFileGenerator {
    */
   private def createRoutes(fom: FomWrapper) {
     yaml += "paths:\n"
-//    yaml += s"""  /objects:
-//      |    get:
-//      |""".stripMargin
     
-    // TODO Create all routes (get, objects and objects\id)
+    // Create all routes (get, objects and objects\id)
     fom.fomObjects.foreach(obj => {
       val ref     = "$ref"
-      val name    = obj.getName()
+      val name    = obj.name
       val path    = name.toLowerCase.replaceAll( "y$", "ie") + "s"
       val desc    = obj.getDescription()
       val summary = "Get all" + name.replaceAll( "([A-Z])", " $1" ) + " items.";
@@ -77,7 +74,7 @@ class SwaggerFileGenerator {
   /**
    * Create the Swagger Models, i.e. a description of the objects that are returned
    */
-  private def createModels(fom: FomWrapper) {
+  private def createModels(fom: FomWrapper) {    
     yaml += "definitions:" + "\n"
     fom.fomObjects.foreach(obj => {
       yaml += obj.toSwaggerModel(fom.primitiveDataTypes, fom.objectDataTypes)
@@ -118,4 +115,5 @@ class SwaggerFileGenerator {
     pw.write(yaml)
     pw.close
   }
+  
 }

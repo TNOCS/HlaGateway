@@ -1,8 +1,9 @@
-package main.scala
+package nl.tno.hla.gateway
 
-import main.fom.FomWrapper
+import nl.tno.hla.fom.FomWrapper
+import nl.tno.hla.swagger.Generator
 
-object Server {
+object Generator {
   def main(args: Array[String]): Unit = {
     println("Load FOM and extract elements!")
     val cwd = System.getProperty("user.dir")
@@ -13,8 +14,9 @@ object Server {
     fom.load(fomFile)
     fom.load("Unmanned_v1_2.xml")
 
-    val creator = new SwaggerFileGenerator()
-    creator.create(fom, "localhost:8080")
+    val creator = new Generator()
+    creator.create(new nl.tno.hla.swagger.FomWrapper(fom), "localhost:8080")
     creator.save("swagger.yaml")
   }
+  
 }

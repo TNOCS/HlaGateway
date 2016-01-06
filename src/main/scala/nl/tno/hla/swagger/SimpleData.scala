@@ -1,17 +1,15 @@
-package main.fom
-
-import scala.xml._
+package nl.tno.hla.swagger
 
 /**
  * Represents a simple data type as defined in the FOM.
  */
-case class SimpleData(simpleData: Node) extends PrimitiveDataType {
-  lazy private val name           = (simpleData \ "name").text
-  lazy private val representation = (simpleData \ "representation").text
-  lazy private val units          = (simpleData \ "units").text
-  lazy private val resolution     = (simpleData \ "resolution").text
-  lazy private val accuracy       = (simpleData \ "accuracy").text
-  lazy private val semantics      = (simpleData \ "semantics").text
+case class SimpleData(simpleData: nl.tno.hla.fom.SimpleData) extends PrimitiveDataType {
+  lazy val name           = simpleData.name
+  lazy val representation = simpleData.representation
+  lazy val units          = simpleData.units
+  lazy val resolution     = simpleData.resolution
+  lazy val accuracy       = simpleData.accuracy
+  lazy val semantics      = simpleData.semantics
   
   lazy private val dataType = representation match {
     case "HLAfloat32BE"           => "number"      

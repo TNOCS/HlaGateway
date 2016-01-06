@@ -1,20 +1,18 @@
-package main.fom
+package nl.tno.hla.swagger
 
 import scala.xml._
 
 /**
  * Represents a enumerated data type as defined in the FOM.
  */
-case class EnumeratedData(basicData: Node) extends PrimitiveDataType {
-  lazy private val name            = (basicData \ "name").text
-  lazy private val representation  = (basicData \ "representation").text
-  lazy private val semantics       = (basicData \ "semantics").text
-  lazy private val enumerator      = (basicData \ "enumerator")
-  lazy private val description     = enumerator map { e => (e \ "value").text + ". " + (e \ "name").text } mkString "; "
-  lazy private val fullDescription = s"""$semantics (Allowable values are $description)"""
-  lazy private val values          = (enumerator \ "value") map { v => v.text toInt }
-  lazy private val minimum         = values min
-  lazy private val maximum         = values max
+case class EnumeratedData(basicData: nl.tno.hla.fom.EnumeratedData) extends PrimitiveDataType {
+  lazy val name            = basicData.name
+  lazy val representation  = basicData.representation
+  lazy val semantics       = basicData.semantics
+  lazy val enumerator      = basicData.enumerator
+  lazy val fullDescription = basicData.fullDescription
+  lazy val minimum         = basicData.minimum
+  lazy val maximum         = basicData.maximum
   
   lazy private val dataType = representation match {
     case "HLAfloat32BE"           => "number"      
@@ -53,7 +51,7 @@ case class EnumeratedData(basicData: Node) extends PrimitiveDataType {
    * Convert the data type to a Swagger model property.
    */
   override def toSwaggerModelProperty(propName: String, summary: String, numberOfSpaces: Int): String = {
-        // Deal with two special circumstances, both of which are strings, but are represented as array
+    // Deal with two special circumstances, both of which are strings, but are represented as array
     if (name == "RPRboolean") {
       val spaces = " " * (numberOfSpaces-1)
       return s"""$spaces $propName:

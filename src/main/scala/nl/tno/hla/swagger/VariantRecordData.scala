@@ -1,17 +1,14 @@
-package main.fom
-
-import scala.xml._
+package nl.tno.hla.swagger
 
 /**
  * Class for mapping the alternatives in VariantRecordData
  */
 
-case class Alternative(alternative: Node) {
-  lazy private val name       = (alternative \ "name"      ).text
-  lazy private val dataType   = (alternative \ "dataType"  ).text
-  lazy private val enumerator = (alternative \ "enumerator").text
-  lazy private val semantics  = (alternative \ "semantics" ).text + s""" Note that this field is only valid of the discriminant is <code>$enumerator</code>."""
-
+case class Alternative(alternative: nl.tno.hla.fom.Alternative) {
+  lazy private val name       = alternative.name
+  lazy private val dataType   = alternative.dataType
+  lazy private val enumerator = alternative.enumerator
+  lazy private val semantics  = alternative.semantics
   /**
    * Convert to a Swagger model property.
    */
@@ -37,16 +34,16 @@ case class Alternative(alternative: Node) {
   }
 }
 
-case class VariantRecordData(variantRecord: Node) extends ObjectDataType {
-  lazy private val name         = variantRecord \ "name" text
+case class VariantRecordData(variantRecord: nl.tno.hla.fom.VariantRecordData) extends ObjectDataType {
+  lazy private val name         = variantRecord.name
   /** 
    *  The discriminant specifies which of the alternatives is valid
    */
-  lazy private val discriminant = variantRecord \ "discriminant" text
-  lazy private val dataType     = variantRecord \ "dataType" text
-  lazy private val encoding     = variantRecord \ "encoding" text
-  lazy private val semantics    = variantRecord \ "semantics" text
-  lazy private val alternatives = variantRecord \ "alternative" map { a => Alternative(a) }
+  lazy private val discriminant = variantRecord.discriminant
+  lazy private val dataType     = variantRecord.dataType
+  lazy private val encoding     = variantRecord.encoding
+  lazy private val semantics    = variantRecord.semantics
+  lazy private val alternatives = variantRecord.alternatives map { a => Alternative(a) }
   
   /**
    * Generate a Swagger model definition

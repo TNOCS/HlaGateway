@@ -1,11 +1,6 @@
-package main.fom
+package nl.tno.hla.swagger
 
-import scala.xml._
-
-/**
- * A class that represents a data type that is represented as an object.
- */
- class ObjectDataType {
+class ObjectDataType {
   /**
    * Specifies whether the object data type is referenced in a definition
    */
@@ -28,5 +23,5 @@ import scala.xml._
     isReferenced = true
     val spaces = " " * numberOfSpaces
     return spaces + "$ref: '#/definitions/" + name + "'\n"
-  }
+  }  
 }

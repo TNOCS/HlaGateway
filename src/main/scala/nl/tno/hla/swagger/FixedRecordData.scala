@@ -1,11 +1,9 @@
-package main.fom
+package nl.tno.hla.swagger
 
-import scala.xml._
-
-case class FieldData(fieldData: Node) {
-  lazy private val name      = (fieldData \ "name").text
-  lazy private val dataType  = (fieldData \ "dataType").text
-  lazy private val semantics = (fieldData \ "semantics").text
+case class FieldData(fieldData: nl.tno.hla.fom.FieldData) {
+  lazy private val name      = fieldData.name
+  lazy private val dataType  = fieldData.dataType
+  lazy private val semantics = fieldData.semantics
 
   /**
    * Convert to a Swagger model property.
@@ -32,11 +30,11 @@ case class FieldData(fieldData: Node) {
   }
 }
 
-case class FixedRecordData(fixedRecord: Node) extends ObjectDataType {
-  lazy private val name      = fixedRecord \ "name" text
-  lazy private val encoding  = fixedRecord \ "encoding" text
-  lazy private val semantics = fixedRecord \ "semantics" text
-  lazy private val fields    = fixedRecord \ "field" map { f => FieldData(f) }
+case class FixedRecordData(fixedRecord: nl.tno.hla.fom.FixedRecordData) extends ObjectDataType {
+  lazy private val name      = fixedRecord.name
+  lazy private val encoding  = fixedRecord.encoding
+  lazy private val semantics = fixedRecord.semantics
+  lazy private val fields    = fixedRecord.fields map { f => FieldData(f) }
     
   /**
    * Generate a Swagger model definition

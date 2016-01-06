@@ -1,18 +1,16 @@
-package main.fom
-
-import scala.xml._
+package nl.tno.hla.swagger
 
 /**
  * Represents a basic data type as defined in the FOM.
  */
-case class BasicData(basicData: Node) extends PrimitiveDataType {
-  lazy private val name           = (basicData \ "name").text
-  lazy private val size           = (basicData \ "size").text
-  lazy private val interpretation = (basicData \ "interpretation").text
-  lazy private val endian         = (basicData \ "endian").text
-  lazy private val encoding       = (basicData \ "encoding").text
+case class BasicData(basicData: nl.tno.hla.fom.BasicData) extends PrimitiveDataType {
+  lazy val name           = basicData.name
+  lazy val size           = basicData.size
+  lazy val interpretation = basicData.interpretation
+  lazy val endian         = basicData.endian
+  lazy val encoding       = basicData.encoding
   
-  lazy private val dataType = name match {
+  lazy val dataType = name match {
     case "RPRunsignedInteger8BE"  => "integer"
     case "RPRunsignedInteger16BE" => "integer"
     case "RPRunsignedInteger32BE" => "integer"
@@ -20,7 +18,7 @@ case class BasicData(basicData: Node) extends PrimitiveDataType {
     case default => "UNKNOWN Basic data type: " + name
   }
     
-  lazy private val format = name match {
+  lazy val format = name match {
     case "RPRunsignedInteger8BE"  => "int32"
     case "RPRunsignedInteger16BE" => "int32"
     case "RPRunsignedInteger32BE" => "int32"
@@ -47,7 +45,5 @@ case class BasicData(basicData: Node) extends PrimitiveDataType {
    */
   override def toSwaggerItemProperty(numberOfSpaces: Int): String = {
     return toSwaggerItemProperty(dataType, format, s"""$name ($interpretation)""", numberOfSpaces)  
-  }
-
-  
+  } 
 }

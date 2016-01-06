@@ -1,4 +1,4 @@
-package main.fom
+package nl.tno.hla.swagger
 
 class PrimitiveDataType {
   def toSwaggerParameter(propName: String, summary: String, numberOfSpaces: Int): String = { return "" }

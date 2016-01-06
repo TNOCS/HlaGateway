@@ -1,13 +1,11 @@
-package main.fom
+package nl.tno.hla.swagger
 
-import scala.xml._
-
-case class ArrayData(arrayData: Node) extends ObjectDataType {
-  lazy private val name        = arrayData \ "name" text
-  lazy private val dataType    = arrayData \ "dataType" text
-  lazy private val cardinality = arrayData \ "cardinality" text
-  lazy private val encoding    = arrayData \ "encoding" text
-  lazy private val semantics   = arrayData \ "semantics" text
+case class ArrayData(arrayData: nl.tno.hla.fom.ArrayData) extends ObjectDataType {
+  lazy private val name        = arrayData.name
+  lazy private val dataType    = arrayData.dataType
+  lazy private val cardinality = arrayData.cardinality
+  lazy private val encoding    = arrayData.encoding
+  lazy private val semantics   = arrayData.semantics
     
   /**
    * Generate a Swagger model definition
@@ -45,5 +43,5 @@ case class ArrayData(arrayData: Node) extends ObjectDataType {
       }
     }
   }
-
+  
 }
