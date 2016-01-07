@@ -5,15 +5,15 @@ import scala.xml._
 import nl.tno.hla.fom._
 
 /**
- * Generates a Swagger YAML file, which can be used to generate a REST server in Scalatra.
+ * Generates a Swagger YAML file.
  */
-class Generator {
+case class SwaggerGenerator(host: String, useObjects: List[String], useInteractions: List[String]) {
   private var yaml = "";
   
-  def create(fom: FomWrapper, host: String = "localhost:8080") {
+  def create(fom: FomWrapper) {
     createHeader(fom, host)
-    createRoutes(fom)
-    createModels(fom)
+    createRoutes(fom, useObjects, useInteractions)
+    createModels(fom, useObjects, useInteractions)
   }
   
   /** 
@@ -37,15 +37,22 @@ class Generator {
       |  - application/xml
       |""".stripMargin
   }
-  
+
+  /**
+   * Returns true if the entry should be processed
+   */
+  private def shouldProcess(entries: List[String], entry: String): Boolean = { 
+    return entries == null || entries.size == 0 || entries.contains(entry)
+  }
+
   /**
    * Create the REST routes
    */
-  private def createRoutes(fom: FomWrapper) {
+  private def createRoutes(fom: FomWrapper, useObjects: List[String], useInteractions: List[String]) {
     yaml += "paths:\n"
-    
+
     // Create all routes (get, objects and objects\id)
-    fom.fomObjects.foreach(obj => {
+    fom.fomObjects.filter(o => shouldProcess(useObjects, o.name)).foreach(obj => {
       val ref     = "$ref"
       val name    = obj.name
       val path    = name.toLowerCase.replaceAll( "y$", "ie") + "s"
@@ -74,9 +81,9 @@ class Generator {
   /**
    * Create the Swagger Models, i.e. a description of the objects that are returned
    */
-  private def createModels(fom: FomWrapper) {    
+  private def createModels(fom: FomWrapper, useObjects: List[String], useInteractions: List[String]) {    
     yaml += "definitions:" + "\n"
-    fom.fomObjects.foreach(obj => {
+    fom.fomObjects.filter(o => shouldProcess(useObjects, o.name)).foreach(obj => {
       yaml += obj.toSwaggerModel(fom.primitiveDataTypes, fom.objectDataTypes)
     })
     
