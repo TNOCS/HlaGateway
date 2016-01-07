@@ -16,8 +16,8 @@ object Generator {
     val fom = new FomWrapper()
     inputFiles foreach(f => fom.load(f))
 
-    val host = options('host).asInstanceOf[String]
-    val useObjects =  options('useObject).asInstanceOf[List[String]]
+    val host            = options('host)          .asInstanceOf[String]
+    val useObjects      = options('useObject)     .asInstanceOf[List[String]]
     val useInteractions = options('useInteraction).asInstanceOf[List[String]]
     
     val creator = new SwaggerGenerator(host, useObjects, useInteractions)
